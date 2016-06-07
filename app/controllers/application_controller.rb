@@ -6,10 +6,16 @@ class ApplicationController < ActionController::API
   end
 
   def receive
-    p "Chegou callback"
-    messaging_events = req.body.entry[0].messaging;
-    p "Carregou eventos"
-    p messaging_events
+    message = request["entry"][0]["messaging"][0]["message"]["text"]
+    user_id = request["entry"][0]["messaging"][0]["recipient"]["id"]
+
+    p message
+    p user_id
+
     render status: 200
+  end
+
+  def send_message(user_id, message)
+
   end
 end
