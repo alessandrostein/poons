@@ -19,6 +19,13 @@ class ApplicationController < ActionController::API
   end
 
   def send_message(user_id, message)
-    render RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})
+    p "Chegou para enviar mensagem #{user_id} e #{message}"
+    begin
+      p "URL: #{URI_SEND_FACEBOOK_MESSAGE}"
+      response = RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})
+      p response
+    rescue
+
+    end
   end
 end
