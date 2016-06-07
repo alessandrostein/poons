@@ -19,6 +19,6 @@ class ApplicationController < ActionController::API
   end
 
   def send_message(user_id, message)
-    render RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: user_id, message: message})
+    render RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})
   end
 end
