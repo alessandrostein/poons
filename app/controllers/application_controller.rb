@@ -19,13 +19,10 @@ class ApplicationController < ActionController::API
   end
 
   def send_message(user_id, message)
-    p "Chegou para enviar mensagem #{user_id} e #{message}"
     begin
-      p "URL: #{URI_SEND_FACEBOOK_MESSAGE}"
-      response = RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})      
-      p "Código da resposta: #{response.code}"
-    rescue
-      p "Deu erro"
+      RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message}, :content_type => :json)
+    rescue => e
+      p "Deu erro: #{e}"
     end
   end
 end
