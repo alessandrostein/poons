@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
 
   def send_message(user_id, message)
     begin
-      RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message}, :content_type => :json)
+      RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message})
     rescue => e
       p "Deu erro: #{e}"
     end
