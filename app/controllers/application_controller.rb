@@ -22,10 +22,10 @@ class ApplicationController < ActionController::API
     p "Chegou para enviar mensagem #{user_id} e #{message}"
     begin
       p "URL: #{URI_SEND_FACEBOOK_MESSAGE}"
-      response = RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})
-      p response
+      response = RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {recipient: {id: user_id}, message: message})      
+      p "Código da resposta: #{response.code}"
     rescue
-
+      p "Deu erro"
     end
   end
 end
