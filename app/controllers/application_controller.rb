@@ -1,3 +1,5 @@
+require 'net/http'
+require 'net/https'
 class ApplicationController < ActionController::API
 
   URI_SEND_FACEBOOK_MESSAGE = "https://graph.facebook.com/v2.6/me/messages?access_token=#{Rails.application.secrets.facebook_messenger['validation_token']}"
