@@ -6,7 +6,10 @@ class ApplicationController < ActionController::API
   end
 
   def receive
-    p request
+    p "Chegou callback"
+    messaging_events = req.body.entry[0].messaging;
+    p "Carregou eventos"
+    p messaging_events
     render status: 200
   end
 end
