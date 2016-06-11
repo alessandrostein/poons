@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
         p "chegou aqui"
         p "Request: #{message}"
         user_id = message["sender"]["id"] if message["sender"].present? && message["sender"]["id"].present?
-        message_text = message["message"] if message["message"].present? && message["message"]["text"].present?        
+        message_text = message["message"]["text"] if message["message"].present? && message["message"]["text"].present?        
         send_message(user_id, message_text) if user_id.present? && message_text.present?
       end
     end
