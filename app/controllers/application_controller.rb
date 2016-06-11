@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
   def send_message(user_id, message)
     begin
       # RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message})
-      RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {
+      p RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {
       recipient: {id: user_id},
       message: message
     }.to_json, content_type: :json, accept: :json)
