@@ -12,7 +12,12 @@ class ApplicationController < ActionController::API
 
   def receive
     p "Entrou"
-    p "Requisição: #{request}"
+    p "Requisição 1: #{request['entry']}"
+    p "Requisição 2: #{request['entry'][0]}"
+    p "Requisição 3: #{request['entry'][0]['messaging']}"
+    p "Requisição 4: #{request['entry'][0]['messaging'][0]}"
+
+
     message = request["entry"][0]["messaging"][0]["message"]["text"]
     p "Mensagem: #{message}"
     user_id = request["entry"][0]["messaging"][0]["recipient"]["id"]
