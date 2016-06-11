@@ -11,7 +11,6 @@ class ApplicationController < ActionController::API
   end
 
   def receive
-    byebug
     entry_received = request["entry"]
     entry_received.each do |entry|
       messaging_received = entry["messaging"]
