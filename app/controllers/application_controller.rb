@@ -11,13 +11,14 @@ class ApplicationController < ActionController::API
   end
 
   def receive
+    byebug
     entry_received = request["entry"]
-    entry_received.each do |entry| do
+    entry_received.each do |entry|
       messaging_received = entry["messaging"]
       messaging_received.each do |message|
         user_id = message["recipient"]["id"]
-        message = message["message"]["text"]
-        send_message(user_id, message)
+        message_text = message["message"]["text"]
+        send_message(user_id, message_text)
       end
     end
   end
