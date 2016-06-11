@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
         p "Request: #{message}"
         user_id = message["sender"]["id"]
         # message_text = message["message"]["text"].present? ? message["message"]["text"] : "Teste"
-        send_message(user_id, "Ops")
+        # send_message(user_id, "Ops")
       end
     end
   end
