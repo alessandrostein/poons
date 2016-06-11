@@ -13,14 +13,14 @@ class ApplicationController < ActionController::API
   def receive
     entry_received = request["entry"]
     entry_received.each do |entry|
+      p "Request entry: #{entry}"
       messaging_received = entry["messaging"]
       messaging_received.each do |message|
         p "chegou aqui"
         p "Request: #{message}"
         user_id = message["sender"]["id"]
-        message_text = message["message"]["text"].present? ? message["message"]["text"] : "Teste"
-        p "Texto para responder: #{message_text}"
-        send_message(user_id, message_text)
+        # message_text = message["message"]["text"].present? ? message["message"]["text"] : "Teste"
+        send_message(user_id, "Ops")
       end
     end
   end
