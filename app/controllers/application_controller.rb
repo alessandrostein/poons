@@ -18,9 +18,9 @@ class ApplicationController < ActionController::API
       messaging_received.each do |message|
         p "chegou aqui"
         p "Request: #{message}"
-        user_id = message["sender"]["id"]
-        # message_text = message["message"]["text"].present? ? message["message"]["text"] : "Teste"
-        # send_message(user_id, "Ops")
+        user_id = message["sender"]["id"] if message["sender"].present? && message["sender"]["id"].present?
+        message_text = message["message"] if message["message"].present? && message["message"]["text"].present?        
+        send_message(user_id, message_text) if user_id.present? && message_text.present?
       end
     end
   end
