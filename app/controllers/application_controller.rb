@@ -11,22 +11,15 @@ class ApplicationController < ActionController::API
   end
 
   def receive
-    p "Entrou"
-    p "Requisição 1: #{request['entry']}"
-    p "Requisição 2: #{request['entry'][0]}"
-    p "Requisição 3: #{request['entry'][0]['messaging']}"
-    p "Requisição 4: #{request['entry'][0]['messaging'][0]}"
-
-
-    message = request["entry"][0]["messaging"][0]["message"]["text"]
-    p "Mensagem: #{message}"
-    user_id = request["entry"][0]["messaging"][0]["recipient"]["id"]
-    p "Usuário: #{user_id}"
-
-    # p message
-    # p user_id
-    send_message(user_id, message)
-    # render status: 200
+    entry_received = request["entry"]
+    entry_received.each do |entry| do
+      messaging_received = entry["messaging"]
+      messaging_received.each do |message|
+        user_id = message["recipient"]["id"]
+        message = message["message"]["text"]
+        send_message(user_id, message)
+      end
+    end
   end
 
   def send_message(user_id, message)
