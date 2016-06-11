@@ -13,13 +13,10 @@ class ApplicationController < ActionController::API
   def receive
     entry_received = request["entry"]
     entry_received.each do |entry|
-      p "Request entry: #{entry}"
       messaging_received = entry["messaging"]
       messaging_received.each do |message|
-        p "chegou aqui"
-        p "Request: #{message}"
         user_id = message["sender"]["id"] if message["sender"].present? && message["sender"]["id"].present?
-        message_text = message["message"]["text"] if message["message"].present? && message["message"]["text"].present?        
+        message_text = message["message"]["text"] if message["message"].present? && message["message"]["text"].present?
         send_message(user_id, message_text) if user_id.present? && message_text.present?
       end
     end
@@ -27,16 +24,13 @@ class ApplicationController < ActionController::API
 
   def send_message(user_id, message)
     begin
-      p "Mensagem recebida de #{user_id} com a mensagem #{message}"
       metadata = {
         recipient: { id: user_id },
         message: { text: "Resposta: #{message}" }
       }
-      # RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message})
       RestClient.post(URI_SEND_FACEBOOK_MESSAGE, metadata, content_type: :json, accept: :json)
-      p "Mensagem respondida para #{user_id} com a mensagem Resposta: #{message}"
     rescue => e
-      p "Deu erro: #{e}"
+      p e
     end
   end
 end
