@@ -32,3 +32,8 @@ class ApplicationController < ActionController::API
     end
   end
 end
+
+# RestClient.post("https://graph.facebook.com/v2.6/me/messages?access_token=#{Rails.application.secrets.facebook_messenger['validation_token']}", {
+#       recipient: {id: 1069123499833828},
+#       message: "Ops"
+#     }.to_json, content_type: :json, accept: :json)
