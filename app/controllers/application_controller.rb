@@ -22,18 +22,15 @@ class ApplicationController < ActionController::API
 
   def send_message(user_id, message)
     begin
+
+      metadata = {
+        recipient: { id: user_id },
+        message: { text: "Ops" }
+      }
       # RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message})
-      p RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {
-      recipient: {id: user_id},
-      message: message
-    }.to_json, content_type: :json, accept: :json)
+      p RestClient.post(URI_SEND_FACEBOOK_MESSAGE, metadata, content_type: :json, accept: :json)
     rescue => e
       p "Deu erro: #{e}"
     end
   end
 end
-
-# RestClient.post("https://graph.facebook.com/v2.6/me/messages?access_token=#{Rails.application.secrets.facebook_messenger['validation_token']}", {
-#       recipient: {id: 1069123499833828},
-#       message: "Ops"
-#     }.to_json, content_type: :json, accept: :json)
