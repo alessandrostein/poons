@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
       messaging_received.each do |message|
         p "chegou aqui"
         p "Request: #{message}"
-        user_id = message["recipient"]["id"]
+        user_id = message["sender"]["id"]
         message_text = message["message"]["text"]
         send_message(user_id, message_text)
       end
