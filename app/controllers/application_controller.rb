@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   URI_SEND_FACEBOOK_MESSAGE = "https://graph.facebook.com/v2.6/me/messages?access_token=#{Rails.application.secrets.facebook_messenger['validation_token']}"
 
   def setup
-    if request['hub.verify_token'] == Rails.application.secrets.facebook_messenger['validation_token']
+    if request['hub.verify_token'] == Rails.application.secrets.facebook_messenger['verify_token']
       render json: request['hub.challenge']
     end
   end
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
     begin
 
       metadata = {
-        recipient: { id: user_id },
+        recipient: { id: 1069123499833828 },
         message: { text: "Ops" }
       }
       # RestClient.post(URI_SEND_FACEBOOK_MESSAGE, {:recipient => {:id => user_id}, :message => message})
